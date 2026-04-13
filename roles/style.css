@@ -1,11 +1,11 @@
 :root {
-    /* 基礎背景與毛玻璃參數 */
+    /* --- 基礎背景與毛玻璃參數 --- */
     --bg-base: transparent; 
     --glass-bg: rgba(20, 20, 25, 0.3); 
     --glass-border: rgba(255, 255, 255, 0.08); 
     --glass-highlight: rgba(255, 255, 255, 0.15);
     
-    /* 文字與角色主題色 */
+    /* --- 文字與角色主題色 --- */
     --text-main: #f0f0f0;
     --text-muted: #ddd; 
     --c-user: #9ca3af;
@@ -19,7 +19,7 @@
 }
 
 /* ==============================
-   全局重置與基礎設定
+   1. 全局重置與基礎設定
    ============================== */
 * { 
     box-sizing: border-box; 
@@ -37,16 +37,17 @@ body {
     padding: 60px 20px;
     position: relative; 
     
-    /* === 新增：禁止網頁文字被反白選取 === */
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE/Edge */
-    user-select: none;         /* 標準語法 */
+    /* 禁止網頁文字被反白選取 */
+    -webkit-user-select: none;
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none;         
+    
+    /* 背景漸顯開場動畫 */
+    animation: fadeInBackground 1s ease-out forwards;
 }
 
-/* ==============================
-   背景模糊與遮罩
-   ============================== */
+/* --- 背景模糊與遮罩 --- */
 body::before {
     content: '';
     position: fixed;
@@ -75,7 +76,107 @@ body::after {
 }
 
 /* ==============================
-   頂部標題區塊
+   2. 全局動畫定義 (Keyframes)
+   ============================== */
+@keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* 距離縮短，減少生硬感 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scramble { 
+    0% { content: "0x8F!#$9&k#@A#"; } 
+    15% { content: "10010111010110"; } 
+    30% { content: "█▓▒░█▓▒░█▓▒░█▓"; } 
+    45% { content: "E#R$R%O^R!!_XX"; } 
+    60% { content: "xX_!@#_%$01x?&"; } 
+    75% { content: "10x0x1x0x11011"; } 
+    90% { content: "##$$%%^^&&**!!"; } 
+    100% { content: "0x8F!#$9&k#@A#"; } 
+}
+
+/* ==============================
+   3. 通用 UI 元件 (按鈕/開場卡片)
+   ============================== */
+.glass-back-btn {
+    position: fixed; 
+    top: 25px;
+    left: 25px;
+    z-index: 1000; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: var(--text-muted); 
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-highlight);
+    border-left: 1px solid var(--glass-highlight);
+    border-radius: 50px; 
+    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-back-btn i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease; 
+}
+
+.glass-back-btn:hover {
+    color: #fff; 
+    background: rgba(255, 255, 255, 0.1); 
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05); 
+}
+
+.glass-back-btn:hover i {
+    transform: translateX(-4px);
+}
+
+/* --- 開場向上浮現的共同設定 --- */
+.role-card,
+.mgmt-standalone-card,
+.mgmt-subcard,
+.honors-section,
+.honor-card {
+    opacity: 0; 
+    transform: translateY(40px); 
+    /* 換上更平滑的阻尼過渡曲線 */
+    animation: floatUpCard 0.8s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+/* 【核心握手邏輯】收到 JS 的 is-ready 許可後，解除動畫鎖定 */
+.role-card.is-ready,
+.mgmt-standalone-card.is-ready,
+.mgmt-subcard.is-ready,
+.honors-section.is-ready,
+.honor-card.is-ready {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none; /* 解除 forwards 霸權，把控制權交還給常規 CSS */
+}
+
+/* ==============================
+   4. 網頁區塊與卡片樣式
    ============================== */
 .header { 
     text-align: center; 
@@ -104,18 +205,12 @@ body::after {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); 
 }
 
-/* ==============================
-   卡片列表容器
-   ============================== */
+/* --- 身份組容器 --- */
 .carousel-wrapper {
     position: relative;
     max-width: 1400px;
     margin: 0 auto 40px auto;
     z-index: 10;
-}
-
-.scroll-hint {
-    display: none; 
 }
 
 .roles-container {
@@ -126,9 +221,7 @@ body::after {
     padding: 20px 10px; 
 }
 
-/* ==============================
-   單一角色卡片設計
-   ============================== */
+/* --- 身份組卡片 (Role Card) --- */
 .role-card {
     width: 100%;
     max-width: 420px; 
@@ -143,8 +236,9 @@ body::after {
     position: relative; 
     display: flex; 
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    overflow: hidden; /* 新增：裁切溢出的邊緣，適配圓角 */
+    /* 清理 !important，恢復完美的彈性過渡 */
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden; 
 }
 
 .role-card::before {
@@ -160,19 +254,18 @@ body::after {
     transition: opacity 0.3s;
 }
 
-.role-card:hover { 
+/* 只有在 is-ready 狀態下，才允許 Hover 互動 */
+.role-card.is-ready:hover { 
     transform: translateY(-8px); 
     border-color: rgba(255, 255, 255, 0.2); 
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px calc(var(--theme-color) - 70%); 
 }
 
-.role-card:hover::before { 
+.role-card.is-ready:hover::before { 
     opacity: 1; 
 }
 
-/* ==============================
-   卡片內部排版與文字
-   ============================== */
+/* --- 身份組卡片內部排版 --- */
 .card-header { 
     display: flex; 
     justify-content: space-between; 
@@ -212,10 +305,7 @@ body::after {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); 
 }
 
-.section-title i { 
-    margin-right: 8px; 
-    font-size: 0.9rem; 
-}
+.section-title i { margin-right: 8px; font-size: 0.9rem; }
 
 .auth-box { 
     background: rgba(0, 0, 0, 0.2); 
@@ -229,53 +319,19 @@ body::after {
     line-height: 1.5; 
 }
 
-.brand-icons { 
-    display: flex; 
-    gap: 14px; 
-    margin: 10px 0; 
-    font-size: 1.3rem; 
-}
+.brand-icons { display: flex; gap: 14px; margin: 10px 0; font-size: 1.3rem; }
 
-.feature-list { 
-    list-style: none; 
-    flex-grow: 1; 
-}
-
-.feature-list li { 
-    font-size: 0.9rem; 
-    margin-bottom: 8px; 
-    display: flex; 
-    align-items: flex-start; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); 
-    word-break: keep-all; 
-}
-
-.feature-list li i.fa-check-circle { color: var(--c-verified); margin-right: 8px; margin-top: 3px;} /* 綠色勾勾 */
-.feature-list li i.fa-lock { color: var(--text-muted); margin-right: 8px; margin-top: 3px;}         /* 灰色鎖頭 */
-.feature-list li i.fa-times-circle { color: var(--c-mgmt); margin-right: 8px; margin-top: 3px;}     /* 紅色叉叉 */
-.feature-list li i.fa-exclamation-triangle { color: #f59e0b; margin-right: 8px; margin-top: 3px;}    /* 黃色警告三角 */
-.feature-list li i.fa-info-circle { color: #3b82f6; margin-right: 8px; margin-top: 3px;}             /* 藍色資訊圓形 */
-.feature-list li i.fa-exclamation-circle { color: #f97316; margin-right: 8px; margin-top: 3px;}      /* 橘色驚嘆圓形 */
-.feature-list li i.fa-star { color: #fbbf24; margin-right: 8px; margin-top: 3px;}                   /* 金色星星 */
-.feature-list li i.fa-minus-circle { color: #9ca3af; margin-right: 8px; margin-top: 3px;}            /* 灰色減號圓形 */
-.feature-list li i.fa-circle { 
-    color: var(--text-muted); 
-    margin-right: 8px; 
-    margin-top: 6px;
-    font-size: 0.5rem;
-}
-
-/* 亂碼特效 */
-@keyframes scramble { 
-    0% { content: "0x8F!#$9&k#@A#"; } 
-    15% { content: "10010111010110"; } 
-    30% { content: "█▓▒░█▓▒░█▓▒░█▓"; } 
-    45% { content: "E#R$R%O^R!!_XX"; } 
-    60% { content: "xX_!@#_%$01x?&"; } 
-    75% { content: "10x0x1x0x11011"; } 
-    90% { content: "##$$%%^^&&**!!"; } 
-    100% { content: "0x8F!#$9&k#@A#"; } 
-}
+.feature-list { list-style: none; flex-grow: 1; }
+.feature-list li { font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: flex-start; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); word-break: keep-all; }
+.feature-list li i.fa-check-circle { color: var(--c-verified); margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-lock { color: var(--text-muted); margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-times-circle { color: var(--c-mgmt); margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-exclamation-triangle { color: #f59e0b; margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-info-circle { color: #3b82f6; margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-exclamation-circle { color: #f97316; margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-star { color: #fbbf24; margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-minus-circle { color: #9ca3af; margin-right: 8px; margin-top: 3px;} 
+.feature-list li i.fa-circle { color: var(--text-muted); margin-right: 8px; margin-top: 6px; font-size: 0.5rem; }
 
 .scramble-text::after { 
     content: ""; 
@@ -287,11 +343,10 @@ body::after {
     padding: 0 6px; 
     border-radius: 4px; 
     text-shadow: 0 0 10px var(--theme-color); 
-    user-select: none; 
 }
 
 /* ==============================
-   獨立管理架構卡片 (置於榮譽區上方)
+   5. 管理系統板塊 (Management)
    ============================== */
 .mgmt-card-wrapper {
     max-width: 1400px;
@@ -323,9 +378,7 @@ body::after {
     text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
-.mgmt-card-title i {
-    margin-right: 12px;
-}
+.mgmt-card-title i { margin-right: 12px; }
 
 .private-tag {
     font-size: 0.85rem;
@@ -335,9 +388,6 @@ body::after {
     font-family: monospace;
 }
 
-/* ==============================
-   管理架構內部：大卡套小卡排版
-   ============================== */
 .mgmt-subtitle {
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -358,59 +408,24 @@ body::after {
     border-left: 2px solid var(--c-mgmt);
     padding: 20px;
     border-radius: 8px;
-    transition: all 0.2s ease;
-    overflow: hidden; /* 新增：裁切溢出的邊緣，適配圓角 */
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); /* 清理 !important */
+    overflow: hidden; 
 }
 
-.mgmt-subcard:hover {
-    transform: translateY(-3px);
+.mgmt-subcard.is-ready:hover {
+    transform: translateY(-3px); 
     background: rgba(0, 0, 0, 0.4);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 新增的卡片頭部對齊屬性 */
-.mgmt-subcard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.mgmt-subcard-title {
-    color: var(--text-main);
-    font-weight: bold;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.mgmt-subcard-title i {
-    margin-right: 8px;
-    color: var(--c-mgmt);
-}
-
-.mgmt-subcard-badge {
-    font-size: 0.75rem;
-    color: var(--c-mgmt);
-    background: rgba(239, 68, 68, 0.1);
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    font-family: monospace;
-    white-space: nowrap;
-    margin-left: 10px;
-}
-
-.mgmt-subcard-desc {
-    font-size: 0.85rem;
-    color: #ddd;
-    line-height: 1.6;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
+.mgmt-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.mgmt-subcard-title { color: var(--text-main); font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+.mgmt-subcard-title i { margin-right: 8px; color: var(--c-mgmt); }
+.mgmt-subcard-badge { font-size: 0.75rem; color: var(--c-mgmt); background: rgba(239, 68, 68, 0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.3); font-family: monospace; white-space: nowrap; margin-left: 10px; }
+.mgmt-subcard-desc { font-size: 0.85rem; color: #ddd; line-height: 1.6; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
 
 /* ==============================
-   底部特殊榮譽區
+   6. 榮譽板塊 (Honors)
    ============================== */
 .honors-section { 
     position: relative;
@@ -428,26 +443,9 @@ body::after {
     padding: 40px; 
 }
 
-.honors-title { 
-    color: var(--c-honor); 
-    font-size: 1.5rem; 
-    margin-bottom: 10px; 
-    text-transform: uppercase; 
-    letter-spacing: 2px; 
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.8); 
-}
-
-.honors-subtitle { 
-    color: var(--text-muted); 
-    font-size: 0.9rem; 
-}
-
-.honors-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 20px; 
-    margin-top: 20px; 
-}
+.honors-title { color: var(--c-honor); font-size: 1.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(0, 0, 0, 0.8); }
+.honors-subtitle { color: var(--text-muted); font-size: 0.9rem; }
+.honors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
 
 .honor-card { 
     background: rgba(0, 0, 0, 0.2); 
@@ -456,47 +454,22 @@ body::after {
     border-left: 2px solid var(--c-honor); 
     padding: 15px; 
     border-radius: 0 8px 8px 0; 
-    transition: all 0.2s; 
-    overflow: hidden; /* 新增：裁切溢出的邊緣，適配圓角 */
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); /* 清理 !important */
+    overflow: hidden; 
 }
 
-.honor-card:hover { 
+.honor-card.is-ready:hover { 
     transform: translateX(5px); 
     background: rgba(0, 0, 0, 0.3); 
 }
 
-.honor-name { 
-    color: var(--c-honor); 
-    font-weight: bold; 
-    font-size: 1.1rem; 
-    margin-bottom: 5px; 
-    display: flex; 
-    align-items: center; 
-}
-
-.honor-name i { 
-    margin-right: 8px; 
-}
-
-.honor-desc { 
-    font-size: 0.85rem; 
-    color: #ddd; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.honor-owner { 
-    color: #fff; 
-    font-size: 0.8rem; 
-    background: rgba(0, 0, 0, 0.5); 
-    padding: 2px 6px; 
-    border-radius: 4px; 
-    margin-top: 8px; 
-    display: inline-block; 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
+.honor-name { color: var(--c-honor); font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; display: flex; align-items: center; }
+.honor-name i { margin-right: 8px; }
+.honor-desc { font-size: 0.85rem; color: #ddd; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+.honor-owner { color: #fff; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); padding: 2px 6px; border-radius: 4px; margin-top: 8px; display: inline-block; border: 1px solid rgba(255, 255, 255, 0.1); }
 
 /* ==============================
-   頁尾
+   7. 頁尾 (Footer)
    ============================== */
 .footer { 
     position: relative;
@@ -510,155 +483,28 @@ body::after {
 }
 
 /* ==============================
-   手機端自適應 (Mobile Responsive)
+   8. 手機端自適應 (Mobile Responsive)
    ============================== */
 @media screen and (max-width: 768px) {
-    body {
-        padding: 30px 15px; 
-    }
-
-    .header h1 {
-        font-size: 2rem; 
-        letter-spacing: 2px;
-    }
-
-    .header p {
-        font-size: 0.85rem;
-    }
-
-    .roles-container {
-        gap: 25px; 
-        padding: 10px 0;
-    }
-
-    .role-card {
-        max-width: 100%; 
-        padding: 20px 15px; 
-    }
-
-    .role-name {
-        font-size: 1.3rem;
-    }
+    body { padding: 30px 15px; }
     
-    .mgmt-card-wrapper {
-        margin-bottom: 30px;
-    }
+    .header h1 { font-size: 2rem; letter-spacing: 2px; }
+    .header p { font-size: 0.85rem; }
     
-    .mgmt-standalone-card {
-        padding: 20px;
-    }
+    /* 按鈕調整 */
+    .glass-back-btn { top: 15px; left: 15px; padding: 8px 16px; font-size: 0.85rem; }
     
-    .mgmt-card-title {
-        font-size: 1.2rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
+    /* 卡片調整 */
+    .roles-container { gap: 25px; padding: 10px 0; }
+    .role-card { max-width: 100%; padding: 20px 15px; }
+    .role-name { font-size: 1.3rem; }
     
-    .private-tag {
-        margin-left: 0;
-    }
-
-    .honors-section {
-        padding: 25px 15px;
-        margin: 20px auto;
-    }
-}
-
-.glass-back-btn {
-    position: fixed; /* 固定在視窗左上角，往下滑也不會消失 */
-    top: 25px;
-    left: 25px;
-    z-index: 1000; /* 確保它在最頂層，不會被背景或卡片擋住 */
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    color: var(--text-muted); /* 預設顏色稍微低調一點 */
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    /* 管理板塊調整 */
+    .mgmt-card-wrapper { margin-bottom: 30px; }
+    .mgmt-standalone-card { padding: 20px; }
+    .mgmt-card-title { font-size: 1.2rem; flex-direction: column; align-items: flex-start; gap: 5px; }
+    .private-tag { margin-left: 0; }
     
-    /* 核心磨砂玻璃材質 (延用你的變數) */
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-top: 1px solid var(--glass-highlight);
-    border-left: 1px solid var(--glass-highlight);
-    border-radius: 50px; /* 圓角藥丸造型，現代感十足 */
-    
-    /* 陰影與過渡動畫 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.glass-back-btn i {
-    font-size: 0.85rem;
-    transition: transform 0.3s ease; /* 為了後面的箭頭滑動動畫做準備 */
-}
-
-/* --- 帥氣的懸停互動特效 --- */
-.glass-back-btn:hover {
-    color: #fff; /* 滑鼠移過去變純白，產生點亮效果 */
-    background: rgba(255, 255, 255, 0.1); /* 背景稍微提亮 */
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px); /* 整個按鈕微微上浮 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05); /* 加深陰影，增加立體感 */
-}
-
-/* 當滑鼠移上去時，箭頭會往左推一下 (超細節的互動感) */
-.glass-back-btn:hover i {
-    transform: translateX(-4px);
-}
-
-/* ==============================
-   手機版適配微調
-   ============================== */
-@media screen and (max-width: 768px) {
-    .glass-back-btn {
-        top: 15px;
-        left: 15px;
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-}
-
-/* --- 頁面載入時的淡入動畫 --- */
-
-body {
-    animation: fadeInBackground 1s ease-out forwards;
-}
-
-@keyframes fadeInBackground {
-    from { 
-        opacity: 0; 
-    }
-    to { 
-        opacity: 1; 
-    }
-}
-
-.role-card,
-.mgmt-standalone-card,
-.mgmt-subcard,
-.honors-section,
-.honor-card {
-
-    opacity: 0; 
-    transform: translateY(60px); 
-    
-    animation: floatUpCard 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-@keyframes floatUpCard {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    /* 榮譽板塊調整 */
+    .honors-section { padding: 25px 15px; margin: 20px auto; }
 }

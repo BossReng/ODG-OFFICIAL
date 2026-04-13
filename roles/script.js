@@ -1,12 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("System Status: Animation Controller Initialized.");
 
-    console.log("System Status: Reverted to native vertical list layout. All scroll locks disabled.");
-
-    const allCards = document.querySelectorAll('.role-card, .mgmt-standalone-card, .mgmt-subcard, .honors-section, .honor-card');
+    const allAnimatedElements = document.querySelectorAll(
+        '.role-card, .mgmt-standalone-card, .mgmt-subcard, .honors-section, .honor-card'
+    );
     
-    allCards.forEach((card, index) => {
-
+    allAnimatedElements.forEach((el, index) => {
         const delay = 0.3 + (index * 0.12);
-        card.style.animationDelay = `${delay}s`;
+        el.style.animationDelay = `${delay}s`;
+        
+        el.addEventListener('animationend', (e) => {
+            if (e.animationName === 'floatUpCard') {
+                el.classList.add('is-ready');
+            }
+        }, { once: true });
     });
 });
