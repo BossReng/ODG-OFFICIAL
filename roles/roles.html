@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODG-OFFICIAL | 身份組與權限系統</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;" ondragstart="return false;">
+
+    <a href="index.html" class="glass-back-btn">
+        <i class="fas fa-chevron-left"></i>
+        <span>返回主頁</span>
+    </a>
+
+    <div class="header">
+        <h1>ODG Authority System</h1>
+        <p>System Authorization & Role Hierarchy / 自動化驗證系統</p>
+    </div>
+
+    <div class="carousel-wrapper">
+        <div class="roles-container" id="rolesContainer">
+            
+            <div class="role-card" style="--theme-color: var(--c-user);">
+                <div class="card-header">
+                    <div class="role-name">ODG【User】</div>
+                    <div class="role-badge">基礎成員</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    加入伺服器並同意 <strong>ODG-EULA</strong> 後，由系統自動簽發
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 授權與限制</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 解鎖公共區域常規文字交流</li>
+                    <li><i class="fas fa-check-circle"></i> 論壇基礎閱覽權限（僅可加入反應）</li>
+                    <li><i class="fas fa-check-circle"></i> 可參與一些基礎的社區活動</li>
+                    <li><i class="fas fa-lock"></i> 不提供任何額外功能（如語音等）</li>
+                    <li><i class="fas fa-times-circle"></i> 無法參與或發起任何的投票活動</li>
+                    <li><i class="fas fa-times-circle"></i> 無法于論壇發表或留言任何内容</li>
+                    <li><i class="fas fa-times-circle"></i> 無法傳輸語音、TTS 及媒體文件</li>
+                </ul>
+            </div>
+
+            <div class="role-card" style="--theme-color: var(--c-verified);">
+                <div class="card-header">
+                    <div class="role-name">ODG【Verified】</div>
+                    <div class="role-badge">驗證用戶</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    需連結以下任一外部平台帳號
+                    <div class="brand-icons">
+                        <i class="fa-brands fa-x-twitter" style="color: #e7e9ea;" title="X (Twitter)"></i>
+                        <i class="fa-brands fa-bluesky" style="color: #0285FF;" title="Bluesky"></i>
+                        <i class="fa-brands fa-reddit" style="color: #FF4500;" title="Reddit"></i>
+                        <i class="fa-brands fa-steam" style="color: #66c0f4;" title="Steam"></i>
+                        <i class="fa-brands fa-paypal" style="color: #0079C1;" title="PayPal"></i>
+                    </div>
+                    <span style="color:var(--theme-color);">且註冊時間需滿 365 天 (1年)</span>
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 授權與限制</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 包含 User 所有可用權益</li>
+                    <li><i class="fas fa-check-circle"></i> 可以發起或參加社區投票</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖 VERIFIED 完整語音通訊</li>                    
+                    <li><i class="fas fa-check-circle"></i> 解鎖語音訊息、TTS 及圖片上傳</li>                    
+                    <li><i class="fas fa-check-circle"></i> 解鎖部分論壇發佈主題與投稿資格</li>
+                </ul>
+            </div>
+
+            <div class="role-card" style="--theme-color: var(--c-premium);">
+                <div class="card-header">
+                    <div class="role-name">ODG【Premium】</div>
+                    <div class="role-badge">資深用戶</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    需連結以下任一外部平台帳號
+                    <div class="brand-icons">
+                        <i class="fa-brands fa-x-twitter" style="color: #e7e9ea;" title="X (Twitter)"></i>
+                        <i class="fa-brands fa-bluesky" style="color: #0285FF;" title="Bluesky"></i>
+                        <i class="fa-brands fa-reddit" style="color: #FF4500;" title="Reddit"></i>
+                        <i class="fa-brands fa-steam" style="color: #66c0f4;" title="Steam"></i>
+                        <i class="fa-brands fa-paypal" style="color: #0079C1;" title="PayPal"></i>
+                    </div>
+                    <span style="color:var(--theme-color);">且註冊時間需滿 1095 天 (3年)</span>
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 授權與限制</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 包含 Verified 所有可用權益</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖 PREMIUM 專屬語音區域</li>
+                    <li><i class="fas fa-check-circle"></i> 可以參加更具權重的 PREMIUM 投票</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖 1 個機密板塊的瀏覽與投稿權限</li>
+                    <li><i class="fas fa-exclamation-triangle"></i> 這些内容或許會在未來改動（增刪查改）</li>
+                </ul>
+            </div>
+
+            <div class="role-card" style="--theme-color: var(--c-dev);">
+                <div class="card-header">
+                    <div class="role-name">ODG【Developer】</div>
+                    <div class="role-badge">開發者</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    強制連結 <i class="fa-brands fa-github" style="color: #ffffff; font-size: 1.1rem; margin: 0 4px;"></i> <strong>GitHub</strong> 帳號以完成技術認證
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 授權與限制</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-info-circle"></i> 基礎權益同步 Verified 級別</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖 DEVELOPER COMMUNITY</li>
+                    <li><i class="fas fa-check-circle"></i> 獲得向專案所有者申請協作開發之資格</li>
+                    <li><i class="fas fa-check-circle"></i> 可向專案所有者申請成為項目維護人</li>
+                    <li><i class="fas fa-check-circle"></i> 可接入自己的 GitHub 項目（需通過審核）</li>
+                    <li><i class="fas fa-lock"></i> 不提供上述功能【之外的】任何額外內容</li>
+                </ul>
+            </div>
+
+            <div class="role-card" style="--theme-color: var(--c-booster);">
+                <div class="card-header">
+                    <div class="role-name">ODG〘 Booster 〙</div>
+                    <div class="role-badge">加成者 / 頂級貴賓</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    為伺服器進行 <strong>Server Boost</strong> 自動獲取<br>
+                    <span style="font-size:0.75rem; color:#aaa;">由 Discord Inc. 託管，贊助停止即自動回收。</span>
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 至尊全域授權</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 無視綁定帳號年份/GitHub 等前置門檻</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖所有社群功能 (現在與未來)</li>
+                    <li><i class="fas fa-check-circle"></i> 解鎖全部語音/開發者/隱藏論壇區域</li>
+                    <li><i class="fas fa-star"></i> 可參與社區任意投票活動，並擁有一票否決權</li>
+                    <li><i class="fas fa-times-circle"></i> 無法參與 Founder-Vote（元老院投票）</li>
+                </ul>
+            </div>
+
+            <div class="role-card" style="--theme-color: var(--c-insider);">
+                <div class="card-header">
+                    <div class="role-name">ODG〘 Founder 〙</div>
+                    <div class="role-badge">元老院</div>
+                </div>
+                <div class="section-title"><i class="fas fa-fingerprint"></i> 資格認定</div>
+                <div class="auth-box">
+                    為伺服器 Server Boost <strong>連續 365 天後</strong>，由系統自動簽發<br>
+                    <span style="font-size:0.75rem; color:#aaa;">元老院將會對此計算日期，即從閣下開始贊助的那一天記起</span>
+                </div>
+                <div class="section-title"><i class="fas fa-satellite-dish"></i> 授權與限制</div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 永久解鎖 Founder 的多個專屬區域</li>                    
+                    <li><i class="fas fa-check-circle"></i> 永久解鎖絕大部分社群功能 (現在與未來)</li>
+                    <li><i class="fas fa-info-circle"></i> 可參與權威的 Founder-Vote（元老院投票）</li>
+                    <li><i class="fas fa-star"></i> 可參與社區任意投票活動，並擁有一票否決權</li>
+                    <li><i class="fas fa-lock"></i> <span class="scramble-text"></span></li>
+                    <li><i class="fas fa-lock"></i> <span class="scramble-text" style="animation-delay: -0.15s;"></span></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mgmt-card-wrapper">
+        <div class="mgmt-standalone-card">
+            <h2 class="mgmt-card-title">
+                <i class="fas fa-server"></i> SYSTEMS & MANAGEMENT / 系統與管理架構 <span class="private-tag">(不對外開放)</span>
+            </h2>
+            <p class="mgmt-subtitle">支撐 ODG - OFFICIAL 伺服器運作的核心中樞與自動化權限設施。</p>
+
+            <div class="mgmt-grid">
+
+                <div class="mgmt-subcard">
+                    <div class="mgmt-subcard-header">
+                        <div class="mgmt-subcard-title"><i class="fas fa-shield-alt"></i> ODG 〖 Management 〗</div>
+                        <div class="mgmt-subcard-badge">官方管理團隊</div>
+                    </div>
+                    <div class="mgmt-subcard-desc">擁有最高系統授權的最終決策樞紐。負責監督自動化進程、介入處置嚴重違規事件，並制定伺服器的頂層發展架構與協議更新。</div>
+                </div>                
+
+                <div class="mgmt-subcard">
+                    <div class="mgmt-subcard-header">
+                        <div class="mgmt-subcard-title"><i class="fas fa-robot"></i> ODG - ROBOT</div>
+                        <div class="mgmt-subcard-badge">統一權限管理</div>
+                    </div>
+                    <div class="mgmt-subcard-desc">核心權限仲裁終端。嚴格執行驗證協議，實時掃描用戶的平台綁定狀態與贊助級別，實現零人工干預的動態身份組派發與權利回收。</div>
+                </div>                
+                
+                <div class="mgmt-subcard">
+                    <div class="mgmt-subcard-header">
+                        <div class="mgmt-subcard-title"><i class="fas fa-microchip"></i> ODG - [xxxxxx]</div>
+                        <div class="mgmt-subcard-badge">自動化組件</div>
+                    </div>
+                    <div class="mgmt-subcard-desc">負責伺服器底層邏輯與高頻任務的自動化處理。包含資料庫同步、無縫日誌封存與異常行為的初步攔截，確保底層設施的絕對穩定。</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="honors-section" id="honorsSection">
+        <h2 class="honors-title">
+            <i class="fas fa-medal"></i> Legends & Honors / 特殊榮譽與勳章
+        </h2>
+        <p class="honors-subtitle">人們曾在 ODG - OFFICIAL 获得的傳奇證明與絕版榮譽。</p>
+        
+        <div class="honors-grid">
+            <div class="honor-card">
+                <div class="honor-name"><i class="fas fa-flask"></i> BETA - TESTER</div>
+                <div class="honor-desc">授予在 ODG Authority System 早期版本通過驗證並保持活躍的用戶群體。此為 ODG - OFFICIAL 絕版榮譽，僅為以下成員準備：</div>
+                <div class="honor-desc">⠀</div>                
+                <div class="honor-owner">@あかつき_暁</div>
+                <div class="honor-owner">@boss_reng</div>
+                <div class="honor-owner">@CocoMilktea1001</div>                                
+                <div class="honor-owner">@homura1021</div>
+                <div class="honor-owner">@lemon.cheese</div>              
+            </div>
+            <div class="honor-card">
+                <div class="honor-name"><i class="fas fa-running"></i> RUNNER ◈ CHENGDU</div>
+                <div class="honor-desc">表彰其在 THE FINALS 跑酷，身法領域之卓越成就。</div>                
+                <div class="honor-owner">@lemon.cheese</div>
+            </div>
+            <div class="honor-card">
+                <div class="honor-name"><i class="fas fa-crosshairs"></i> ENFORCERS ◈ FRELJORD</div>
+                <div class="honor-desc">表彰其在 THE FINALS 槍法、格鬥領域之卓越成就。</div>            
+                <div class="honor-owner">@あかつき_暁</div>                
+                <div class="honor-owner">@CocoMilktea1001</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" id="footerSection">
+        ODG - OFFICIAL &copy; 2022-2026<br>
+        All access rights are executed based on the automated verification system.
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
