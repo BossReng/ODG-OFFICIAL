@@ -624,3 +624,41 @@ body::after {
         font-size: 0.85rem;
     }
 }
+
+/* --- 頁面載入時的淡入動畫 --- */
+
+body {
+    animation: fadeInBackground 1s ease-out forwards;
+}
+
+@keyframes fadeInBackground {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+.role-card,
+.mgmt-standalone-card,
+.mgmt-subcard,
+.honors-section,
+.honor-card {
+
+    opacity: 0; 
+    transform: translateY(60px); 
+    
+    animation: floatUpCard 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes floatUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
