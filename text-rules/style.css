@@ -45,7 +45,7 @@ body {
 }
 
 /* ==============================
-   背景模糊與遮罩
+   背景模糊與遮罩 (含開場漸顯動畫)
    ============================== */
 body::before {
     content: '';
@@ -61,6 +61,15 @@ body::before {
     z-index: -2;
     filter: blur(90px); 
     transform: scale(1.1); 
+    
+    /* 開場全黑漸顯設定 */
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+/* 當 JS 載入完畢賦予 is-loaded 時，背景亮起 */
+body.is-loaded::before {
+    opacity: 1;
 }
 
 body::after {
@@ -75,55 +84,24 @@ body::after {
 }
 
 /* ==============================
-   頂部導航與標題區塊
+   頂部導航與標題區塊 (含開場下沉浮現動畫)
    ============================== */
-.glass-back-btn {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    z-index: 1000; 
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    color: var(--text-muted); 
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-top: 1px solid var(--glass-highlight);
-    border-left: 1px solid var(--glass-highlight);
-    border-radius: 50px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.glass-back-btn i {
-    font-size: 0.85rem;
-    transition: transform 0.3s ease; 
-}
-
-.glass-back-btn:hover {
-    color: #fff; 
-    background: rgba(255, 255, 255, 0.1); 
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px); 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05); 
-}
-
-.glass-back-btn:hover i {
-    transform: translateX(-4px);
-}
-
 .header { 
     text-align: center; 
     margin-bottom: 60px; 
     position: relative;
     z-index: 10;
+    
+    /* 標題初始隱藏並稍微往上，準備降落 */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+/* 當 JS 載入完畢賦予 is-loaded 時，標題降落並顯現 */
+body.is-loaded .header {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .header h1 { 
@@ -147,7 +125,7 @@ body::after {
 }
 
 .rule-intro-text {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto 0 auto;
     font-size: 0.95rem;
     color: var(--text-muted);
@@ -164,10 +142,10 @@ body::after {
 }
 
 /* ==============================
-   核心規章：外層大卡片設計 (繼承毛玻璃)
+   核心規章：外層大卡片設計 (繼承毛玻璃 + 動畫)
    ============================== */
 .rules-container {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto 50px auto;
     display: flex;
     flex-direction: column;
@@ -190,6 +168,28 @@ body::after {
     position: relative; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     overflow: hidden;
+
+    /* 動畫初始狀態：透明且往下沉 */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 登場動畫完成後的狀態 (由 JS 賦予) */
+.rule-card.is-ready {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover 懸浮效果 (僅限電腦端，避免手機點擊卡頓) */
+@media (hover: hover) and (pointer: fine) {
+    .rule-card.is-ready:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
 }
 
 /* 大卡片頂部顏色光條 */
@@ -273,6 +273,46 @@ body::after {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
+/* ==============================
+   列表與對齊結構 (Flexbox 解決方案)
+   ============================== */
+.category-title {
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.list-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.list-bullet {
+    width: 18px; /* 這裡控制點點和文字的距離 */
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.7); /* 讓點點稍微暗一點 */
+    line-height: 1.7; /* 對齊文字行高 */
+    font-size: 0.95rem;
+}
+
+.list-content {
+    flex-grow: 1;
+    line-height: 1.7;
+    color: #d1d5db;
+    font-size: 0.95rem;
+}
+
+.sub-list {
+    margin-top: 4px;
+    margin-left: 20px; /* 往右縮進的距離 */
+}
+
+/* ==============================
+   其他輔助標籤
+   ============================== */
 .legal-list {
     margin: 0;
     padding-left: 20px;
@@ -351,13 +391,6 @@ body::after {
         padding: 30px 15px; 
     }
 
-    .glass-back-btn {
-        top: 15px;
-        left: 15px;
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-
     .header h1 {
         font-size: 2rem; 
         letter-spacing: 2px;
@@ -392,7 +425,7 @@ body::after {
     position: absolute;
     left: 0;
     top: 0;
-    color: #a855f7; /* 搭配 D 區的紫色，如果是 F 區可改為紅色 #ef4444 */
+    color: #ef4444; 
     background: transparent;
     animation: scramble 1.5s infinite linear;
     white-space: nowrap;

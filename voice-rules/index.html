@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODG-OFFICIAL | 語音交互與隱私協議</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        /* 確保列表文字完美對齊的魔法 */
+        .list-row {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        .list-bullet {
+            white-space: pre;
+            flex-shrink: 0;
+            line-height: 1.6;
+        }
+        .list-content {
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>ODG Voice Protocols</h1>
+        <p>Voice Interaction & Privacy Rules / 語音交互規範與隱私協議</p>
+        <div class="rule-intro-text">
+            本章節旨在闡述本伺服器 <strong>語音相關之分區、權限分級、對應門檻</strong> 等。<br>
+            協議履行方 需注意下列規定並遵守，<br>
+            <span class="highlight-text">以確保 ODG-OFFICIAL 社群生態之有序運作。</span>
+        </div>
+    </div>
+
+    <div class="rules-container">
+
+        <div class="rule-card" style="--theme-color: #3b82f6;">
+            <div class="card-header">
+                <div class="role-name">『 ARTICLE I 』</div>
+                <div class="role-badge">語音交互與信號規範</div>
+            </div>
+            
+            <div class="legal-subcard">
+                <div class="legal-section-title">一、 條款定義</div>
+                <div class="legal-text">
+                    基於 ODG-OFFICIAL 對「頻寬資源」與「信號信噪比」的維護，<br>
+                    所有接入公共語音節點的終端，必須嚴格遵守「基礎聲學交互協定」！
+                </div>
+            </div>
+
+            <div class="legal-subcard">
+                <div class="legal-section-title">二、 詳盡規範 (詳細條目)</div>
+                <div class="legal-text">
+                    <strong>【噪音控制與輸入靈敏度】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">若當前環境嘈雜（機械鍵盤、風扇、背景人聲），成員必須自覺啟用 <strong>「按鍵發話」</strong> 模式。</div>
+                    </div>
+                    <br>
+                    
+                    <strong>【惡意聲學攻擊】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">故意播放高分貝噪音、尖叫、刺耳高頻音頻，或使用任意方式製造其他成員無法接受之音頻。</div>
+                    </div>
+                    <br>
+
+                    <strong>【頻道秩序與音效限制】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>音效板濫用：</strong> 禁止惡意且密集地播放 Discord 內建音效 (Soundboard) 干擾正常交流。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>惡意跳頻：</strong> 嚴禁短時間內高頻率進出頻道，以此觸發系統提示音進行聽覺轟炸。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>掛機佔位：</strong> 若需長時間離開設備 (AFK)，請自覺將帳號移動至掛機專用頻道。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-subcard punishment">
+                <div class="legal-section-title">三、 處置協定</div>
+                <div class="legal-text">
+                    <strong>【噪音干擾處置】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">持續輸入背景噪音導致通訊受阻者，執行 <strong>伺服器靜音 (Server Mute)</strong>；經提醒仍未改善者，將被暫時剝奪語音連接權限。</div>
+                    </div>
+                    <br>
+
+                    <strong>【惡意聲學攻擊之處置】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>初犯 (First offense)：</strong> 記錄警告並執行暫時靜音。警告次數達 <strong>三次</strong> 之用戶，執行 <strong>驅逐 (Kick)</strong>。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>累犯 (Recidivism)：</strong> 申訴回歸人員將保留觀察。若再犯則視爲「無法履行協定之條款」，列入黑名單並執行 <strong>永久封禁 (Permanent Ban)</strong>，且不接受再度注冊！</div>
+                    </div>
+                </div>
+                <div class="punishment-note">
+                    「惡意聲學攻擊：初犯」 將保留『客服工單申訴』之權利。<br>
+                    「惡意聲學攻擊：纍犯」 將不再適用於『客服工單申訴』！
+                </div>
+            </div>
+        </div>
+
+        <div class="rule-card" style="--theme-color: #f59e0b;">
+            <div class="card-header">
+                <div class="role-name">『 ARTICLE II 』</div>
+                <div class="role-badge">舞台廣播與議程規範</div>
+            </div>
+            
+            <div class="legal-subcard">
+                <div class="legal-section-title">一、 條款定義</div>
+                <div class="legal-text">
+                    <strong>社區舞台</strong> 為單向或半雙向的「高優先級廣播區域」。<br>
+                    此區域實行嚴格的「發言權分級制度」以確保會議與活動之議程推進。
+                </div>
+            </div>
+
+            <div class="legal-subcard">
+                <div class="legal-section-title">二、 詳盡規範 (詳細條目)</div>
+                <div class="legal-text">
+                    <strong>【演講者職責】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">擁有主頻段佔用權。需確保內容緊扣議程主題，禁止長時間無意義靜默或偏離議題。</div>
+                    </div>
+                    <br>
+                    
+                    <strong>【聽眾交互秩序】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">觀衆將默認處於 <strong>靜音 (Muted)</strong> 狀態。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">僅在主持人宣佈 「問答環節」 開放時，方允許使用舉手功能。非議程時間隨意舉手將被視為惡意干擾。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-subcard punishment">
+                <div class="legal-section-title">三、 處置協定</div>
+                <div class="legal-text">
+                    擾亂舞台秩序者（如搶麥、刷屏舉手），將被 <strong>駁回請求</strong> 並 <strong>移除出舞台</strong>。<br>
+                    嚴重干擾大型官方活動進程者，將被剝奪 <strong>參與當前活動之資格</strong>。
+                </div>
+            </div>
+        </div>
+
+        <div class="rule-card" style="--theme-color: #ef4444;">
+            <div class="card-header">
+                <div class="role-name">『 ARTICLE III 』</div>
+                <div class="role-badge">語音隱私與錄製禁令</div>
+            </div>
+            
+            <div class="legal-subcard">
+                <div class="legal-section-title">一、 條款定義</div>
+                <div class="legal-text">
+                    基於 GDPR 及各區域隱私法案，語音通訊包含用戶之「生物特徵」。<br>
+                    嚴格界定 ODG-OFFICIAL 內語音數據的「採集邊界」與「隱私紅綫」。
+                </div>
+            </div>
+
+            <div class="legal-subcard">
+                <div class="legal-section-title">二、 詳盡規範 (詳細條目)</div>
+                <div class="legal-text">
+                    <strong>【未經授權的錄製】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">嚴禁使用第三方軟件、插件或硬件設備對伺服器語音內容進行 錄音、轉播 或 採樣。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　　 </div>
+                        <div class="list-content"><span class="muted-text">例外：內容創作者需獲得在場所有用戶之「口頭同意」才可進行相關操作。</span></div>
+                    </div>
+                    <br>
+
+                    <strong>【商業機密外洩禁止】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">嚴禁錄製、轉述或外洩任何涉及 伺服器開發、商業合作、未公開企劃 或 管理層內部會議 之語音內容。</div>
+                    </div>
+                    <br>
+
+                    <strong>【免責與檢舉機制】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">基於本協議之錄音禁令，若成員於語音內遭遇言語騷擾或威脅，請 <strong>立即尋求在場第三人作證</strong>，並開啟客服工單呼叫管理員。官方將依據多方證詞與後台日誌裁決，絕不姑息語音暴力。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-subcard punishment">
+                <div class="legal-section-title">三、 處置協定</div>
+                <div class="legal-text">
+                    <strong>【一般隱私侵犯】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">凡涉及未經授權錄音並公開散佈他人語音隱私者，視為 <strong>嚴重侵權</strong>。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">經核實，將列入黑名單並執行 <strong>永久封禁 (Permanent Ban)</strong>，且不接受再度注冊！</div>
+                    </div>
+                    <br>
+
+                    <strong>【商業機密與極密洩露】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">處分：<strong>法律追責 (Legal Action)</strong></div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">描述：ODG-OFFICIAL 管理層及元老院將直接保全證據，並委託法務團隊依據<strong>「台灣 - 營業秘密法 第 11 ~ 13 號條款」</strong>對洩密者提起實質的民事與刑事訴訟，絕不寬待。</div>
+                    </div>
+                </div>
+                <div class="punishment-note">
+                    注意事項：『 ARTICLE III 』的所有相關處罰，皆不適用於『客服工單申訴』！
+                </div>
+            </div>
+        </div>
+
+        <div class="rule-card" style="--theme-color: #8b5cf6;">
+            <div class="card-header">
+                <div class="role-name">『 ARTICLE IV 』</div>
+                <div class="role-badge">螢幕串流與內容分級規範</div>
+            </div>
+            
+            <div class="legal-subcard">
+                <div class="legal-section-title">一、 條款定義</div>
+                <div class="legal-text">
+                    規範語音頻道內之「螢幕分享 (Go Live)」與「視訊」功能。<br>
+                    ODG-OFFICIAL 将会嚴格落實內容分級，以確保各受眾群體之體驗與合規性。
+                </div>
+            </div>
+
+            <div class="legal-subcard">
+                <div class="legal-section-title">二、 詳盡規範 (詳細條目)</div>
+                <div class="legal-text">
+                    <strong>【成人直播與分區限制】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">若需進行成人內容 (18+) 或 NSFW（Not Safe For Work）直播，<strong>必須於「指定限制級專區」進行</strong>。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　　 </div>
+                        <div class="list-content"><span class="muted-text">註：本伺服器基準配置為「每四個語音頻道中，設有兩個專屬限制級頻道」供此用途。請確實辨識頻道標籤。</span></div>
+                    </div>
+                    <br>
+                    
+                    <strong>【極端獵奇內容禁令】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>常規血腥豁免：</strong> 一般正常向電子遊戲內之戰鬥或血腥表現（例如：《真人快打 Mortal Kombat》、《惡靈古堡》等）屬於正常容許範圍。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content"><strong>絕對禁止：</strong> 即使於限制級 (18+) 專區內，亦<strong>嚴禁播放「極端獵奇 (Guro)」、「真實血腥 / 傷亡片段」</strong>或任何違背基礎道德與法律底線之內容。通常，我們將違反者個人及相關群體視爲『無法履行協定之條款』。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-subcard punishment">
+                <div class="legal-section-title">三、 處置協定</div>
+                <div class="legal-text">
+                    <strong>【違規串流處置】</strong>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">於非限制級區域播放成人內容，將被 <strong>強制中斷直播</strong> 並處以 <strong>伺服器警告</strong>。</div>
+                    </div>
+                    <div class="list-row">
+                        <div class="list-bullet">　• </div>
+                        <div class="list-content">蓄意播放「極端獵奇 / 真實血腥」內容者，無論身處何頻道，將直接視為嚴重危害社群安全，執行 <strong>無警告永久封禁 (Permanent Ban)</strong>。</div>
+                    </div>
+                    <div class="punishment-note">
+                        注意事項：『 ARTICLE IV 』中關於『播放獵奇，血腥等内容』的相關處罰，將不適用於『客服工單申訴』！
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        ODG - OFFICIAL &copy; 2022-<span id="currentYear"></span><br>
+        All access rights are executed based on the automated verification system.
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
