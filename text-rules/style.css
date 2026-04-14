@@ -427,7 +427,7 @@ body.is-loaded .header {
     top: 0;
     color: #ef4444; 
     background: transparent;
-    animation: scramble 1.5s infinite linear;
+    animation: scramble 1.0s infinite linear;
     white-space: nowrap;
 }
 
